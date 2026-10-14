@@ -1,0 +1,11 @@
+# build directories
+build/
+build-*/
+out/
+cmake-build-*/
+
+# IDE and tool caches
+.vs/
+.vscode/
+.idea/
+.cache/
