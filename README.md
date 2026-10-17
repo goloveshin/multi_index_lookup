@@ -1,6 +1,6 @@
 # multi_index_lookup
 
-[![CI](https://github.com/goloveshin/multi_index_lookup/actions/workflows/ci.yml/badge.svg)](https://github.com/goloveshin/multi_index_lookup/actions/workflows/ci.yml)
+[![Linux CI](https://github.com/goloveshin/multi_index_lookup/actions/workflows/linux-ci.yml/badge.svg)](https://github.com/goloveshin/multi_index_lookup/actions/workflows/linux-ci.yml) [![Windows CI](https://github.com/goloveshin/multi_index_lookup/actions/workflows/windows-ci.yml/badge.svg)](https://github.com/goloveshin/multi_index_lookup/actions/workflows/windows-ci.yml)
 
 A small header-only wrapper around [Boost.MultiIndex](https://www.boost.org/doc/libs/release/libs/multi_index/doc/index.html).
 
