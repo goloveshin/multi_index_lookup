@@ -4,7 +4,7 @@
 
 A small header-only wrapper around [Boost.MultiIndex](https://www.boost.org/doc/libs/release/libs/multi_index/doc/index.html).
 
-`multi_index_lookup::container_extended_t` is a Boost.MultiIndex container plus lookup by index tag: find a record, find a range, and modify a record. A missing key is reported either as an empty `std::optional` or by calling a function you pass.
+`multi_index_lookup::container_extended_t` is a Boost.MultiIndex container plus lookup by index tag: find a record, find a range, modify a record, and erase a record. A missing key is reported either as an empty `std::optional` or by calling a function you pass.
 
 ## Requirements
 

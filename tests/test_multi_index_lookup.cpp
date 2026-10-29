@@ -155,6 +155,38 @@ TEST_CASE("try_find_by returns empty when the key is absent")
     CHECK_FALSE(container.try_find_by<by_id>(9).has_value());
 }
 
+TEST_CASE("try_erase_by erases the record when the key is present")
+{
+    auto container = filled();
+
+    CHECK(container.try_erase_by<by_id>(2));
+
+    CHECK_FALSE(container.try_find_by<by_id>(2).has_value());
+    CHECK(container.size() == 3);
+    CHECK(container.try_find_by<by_id>(1)->get().name == "one");
+}
+
+TEST_CASE("try_erase_by returns false when the key is absent")
+{
+    auto container = filled();
+
+    CHECK_FALSE(container.try_erase_by<by_id>(9));
+
+    CHECK(container.size() == 4);
+}
+
+TEST_CASE("try_erase_by on a non-unique index erases the first record with the key")
+{
+    auto container = filled();
+
+    CHECK(container.try_erase_by<by_group>(10));
+
+    CHECK(container.size() == 3);
+    CHECK_FALSE(container.try_find_by<by_id>(1).has_value());
+    CHECK(container.try_find_by<by_id>(2)->get().name == "two");
+    CHECK(container.try_find_by<by_id>(3).has_value());
+}
+
 TEST_CASE("find_by_or_throw returns the stored record, not a copy")
 {
     const auto container = filled();

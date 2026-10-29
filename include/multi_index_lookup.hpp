@@ -126,6 +126,7 @@ enum class modify_result_et { absent, rejected, modified };
 //   find_*_or_throw  - take a function that is called when nothing is found; it must throw
 //   *_and_do         - take functions for both outcomes: found and not found
 //   *_and_modify     - change the found record through the index
+//   try_erase_by     - erase one record with the key; return false when the key is absent
 //   equal_range_by, range_between - return a range, which is empty when nothing is found
 // Type suffixes:
 //   _t   - type
@@ -267,6 +268,23 @@ public:
             return std::forward<AndThenFunc>(and_then_func)(index, *found, **found);
         }
         return std::forward<OrElseFunc>(or_else_func)(index);
+    }
+
+    // Erases one record with the key and returns true when a record was erased.
+    // On a non-unique index, find returns the first record with the key, and only that record is erased.
+    // testing: yes (unit)
+    //
+    template <typename ByTag, typename Value>
+    bool try_erase_by(Value&& value)
+    {
+        auto& index = index_by<ByTag>();
+
+        if (auto it = index.find(std::forward<Value>(value)); it != index.end())
+        {
+            index.erase(it);
+            return true;
+        }
+        return false;
     }
 
     // Returns the range of all records with the key (equal_range).
